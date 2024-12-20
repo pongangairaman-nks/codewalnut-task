@@ -76,25 +76,19 @@ The objective was to enhance and extend the functionality of the existing Timer 
    git clone https://github.com/pongangairaman-nks/codewalnut-task.git
    ```
 
-2. Checkout dev branch:
-
-   ```bash
-   git checkout dev
-   ```
-
-3. Install dependencies:
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-4. Start the development server:
+3. Start the development server:
 
    ```bash
    npm run dev
    ```
 
-5. Run tests:
+4. Run tests:
    ```bash
    npx vitest
    ```
