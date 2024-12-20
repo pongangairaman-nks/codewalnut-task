@@ -94,7 +94,8 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({
               handleSubmit();
             } else {
               toast.error(`Please enter valid input in the form fields`, {
-                duration: 5000
+                duration: 5000,
+                position: window.innerWidth < 768 ? "bottom-right" : "top-right"
               });
             }
           }}
