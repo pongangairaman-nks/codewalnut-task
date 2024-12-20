@@ -10,7 +10,9 @@ const timerSlice = createSlice({
   name: "timer",
   initialState,
   reducers: {
+    //creating a new reducer for loading timers from the local storage
     loadTimers: (state) => {
+      // loading timers from local storage
       const persistedTimers = localStorage.getItem("timers");
       if (persistedTimers) {
         state.timers = JSON.parse(persistedTimers);
@@ -24,6 +26,8 @@ const timerSlice = createSlice({
         id: crypto.randomUUID(),
         createdAt: Date.now()
       });
+
+      //adding timers to the local storage
       localStorage.setItem("timers", JSON.stringify(state.timers));
     },
     deleteTimer: (state, action) => {
@@ -63,6 +67,8 @@ const timerSlice = createSlice({
         Object.assign(timer, action.payload.updates);
         timer.remainingTime = action.payload.updates.duration || timer.duration;
         timer.isRunning = false;
+
+        //adding timers to the local storage
         localStorage.setItem("timers", JSON.stringify(state.timers));
       }
     }

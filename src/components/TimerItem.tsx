@@ -1,23 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Trash2, RotateCcw, Pencil } from "lucide-react";
-import { Timer } from "../types/timer";
 import { formatTime } from "../utils/time";
 import { useTimerStore } from "../redux/actions/timerActions";
-// import { toast } from "sonner";
 import { TimerAudio } from "../utils/audio";
 import { TimerControls } from "./TimerControls";
 import { TimerProgress } from "./TimerProgress";
 import { AddEditTimerModal } from "./AddEditTimerModal";
 import { useToast } from "../hooks/useToast";
-
-interface TimerItemProps {
-  timer: Timer;
-}
+import { TimerItemProps } from "../types/timer";
 
 export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const { toggleTimer, deleteTimer, updateTimer, restartTimer } =
     useTimerStore();
-  const { showToast } = useToast(); // Initialize the hook
+  const { showToast } = useToast(); // Initializing the custom hook
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const intervalRef = useRef<number | null>(null);
@@ -33,6 +28,7 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
           hasEndedRef.current = true;
           timerAudio.play().catch(console.error);
           let count = 0;
+          //snackbar has a time limit of 5000 ms and so we are playing the audio once for each second for 5 times
           setInterval(() => {
             if (count < 5) {
               timerAudio.play().catch(console.error);

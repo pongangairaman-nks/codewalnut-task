@@ -19,7 +19,7 @@ export const useTimerStore = () => {
 
   return {
     timers,
-    loadTimers: () => dispatch(loadTimers()),
+    loadTimers: () => dispatch(loadTimers()), //creating a new action for loading timers
     addTimer: (timer: Omit<Timer, "id" | "createdAt">) =>
       dispatch(addTimer(timer)),
     deleteTimer: (id: string) => dispatch(deleteTimer(id)),

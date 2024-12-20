@@ -1,18 +1,7 @@
 // useToast.ts (Custom Hook)
 
 import { toast } from "sonner";
-
-interface ToastAction {
-  label: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-}
-
-interface ToastOptions {
-  message: string;
-  duration?: number;
-  position?: "top-right" | "bottom-right" | "top-left" | "bottom-left";
-  action?: ToastAction;
-}
+import { ToastOptions } from "../types/toast";
 
 export const useToast = () => {
   const showToast = ({

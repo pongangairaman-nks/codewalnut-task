@@ -2,22 +2,16 @@ import React, { useState } from "react";
 import { X, Clock } from "lucide-react";
 import { useTimerStore } from "../redux/actions/timerActions";
 import { validateTimerForm } from "../utils/validation";
-import { Timer } from "../types/timer";
+import { AddEditTimerModalProps } from "../types/timer";
 import Button from "./Button";
 import { useToast } from "../hooks/useToast";
-
-interface AddEditTimerModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  timer?: Timer | null;
-}
 
 export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
   isOpen,
   onClose,
   timer
 }) => {
-  const { showToast } = useToast(); // Initialize the hook
+  const { showToast } = useToast(); // Initializing the custom hook
 
   const [title, setTitle] = useState(timer?.title || "");
   const [description, setDescription] = useState(timer?.description || "");
@@ -46,6 +40,7 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
 
     const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
+    //if timer is passed and has an id, then edit action is executed, else add timer is executed
     if (timer?.id) {
       editTimer(timer.id, {
         title: title.trim(),
@@ -113,7 +108,9 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
 
         <form
           onSubmit={(e) => {
-            e.preventDefault();
+            e.preventDefault(); //preventing default submit event
+
+            //if form is valid, proceeding with form submission or showing error snackbar
             if (isTitleValid || isTimeValid) {
               handleSubmit();
             } else {

@@ -1,8 +1,5 @@
-import React from 'react';
-
-interface TimerProgressProps {
-  progress: number;
-}
+import React from "react";
+import { TimerProgressProps } from "../types/timer";
 
 export const TimerProgress: React.FC<TimerProgressProps> = ({ progress }) => (
   <div className="w-full bg-gray-200 rounded-full h-2 mb-4">

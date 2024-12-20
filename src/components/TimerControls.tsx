@@ -1,13 +1,6 @@
 import React from "react";
 import { Play, Pause, RotateCcw } from "lucide-react";
-
-interface TimerControlsProps {
-  isRunning: boolean;
-  remainingTime: number;
-  duration: number;
-  onToggle: () => void;
-  onRestart: () => void;
-}
+import { TimerControlsProps } from "../types/timer";
 
 export const TimerControls: React.FC<TimerControlsProps> = ({
   isRunning,

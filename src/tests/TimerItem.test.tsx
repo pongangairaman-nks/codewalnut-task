@@ -22,7 +22,6 @@ const mockTimer: Timer = {
   createdAt: Date.now()
 };
 
-// Define mock store and toast return types
 type MockTimerStore = {
   toggleTimer: jest.Mock;
   deleteTimer: jest.Mock;
@@ -116,7 +115,7 @@ describe("TimerItem Component", () => {
     render(<TimerItem timer={mockTimer} />);
 
     // Click the edit button to open the modal
-    const editButton = screen.getByTitle("Edit Timer"); // Adjust the title or selector as necessary
+    const editButton = screen.getByTitle("Edit Timer");
     fireEvent.click(editButton);
 
     // Optionally, check for a button or input inside the modal
