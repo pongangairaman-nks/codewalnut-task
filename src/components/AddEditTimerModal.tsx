@@ -90,12 +90,18 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
   const isTitleValid = title.trim().length > 0 && title.length <= 50;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div
+      data-test-id="add-edit-modal"
+      role="dialog"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+    >
       <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-blue-600" />
-            <h2 className="text-xl font-semibold">Add New Timer</h2>
+            <h2 className="text-xl font-semibold">
+              {timer?.id ? "Edit Timer" : "Add New Timer"}
+            </h2>
           </div>
           <button
             onClick={handleClose}
