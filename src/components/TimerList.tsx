@@ -1,7 +1,7 @@
-import React from 'react';
-import { TimerItem } from './TimerItem';
-import { useTimerStore } from '../store/useTimerStore';
-import { EmptyState } from './EmptyState';
+import React from "react";
+import { TimerItem } from "./TimerItem";
+import { useTimerStore } from "../store/useTimerStore";
+import { EmptyState } from "./EmptyState";
 
 export const TimerList: React.FC = () => {
   const { timers } = useTimerStore();
@@ -19,7 +19,7 @@ export const TimerList: React.FC = () => {
           </p>
         </div>
       ) : (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="w-full">
           {timers.map((timer) => (
             <TimerItem key={timer.id} timer={timer} />
           ))}
