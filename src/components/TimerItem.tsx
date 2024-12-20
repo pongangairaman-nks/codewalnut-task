@@ -22,7 +22,6 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const hasEndedRef = useRef(false);
 
   useEffect(() => {
-    console.log("timer title", timer.title, timer);
     if (timer.isRunning) {
       intervalRef.current = window.setInterval(() => {
         updateTimer();
