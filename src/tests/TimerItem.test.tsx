@@ -1,13 +1,13 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, vi, expect, beforeEach, afterEach } from "vitest";
-import { TimerItem } from "./TimerItem";
+import { TimerItem } from "../components/TimerItem";
 import { Timer } from "../types/timer";
-import { useTimerStore } from "../store/useTimerStore";
+import { useTimerStore } from "../redux/actions/timerActions";
 import { useToast } from "../hooks/useToast";
 import { TimerAudio } from "../utils/audio";
 
 // Mock hooks and utilities
-vi.mock("../store/useTimerStore");
+vi.mock("../redux/actions/timerActions");
 vi.mock("../hooks/useToast");
 vi.mock("../utils/audio");
 

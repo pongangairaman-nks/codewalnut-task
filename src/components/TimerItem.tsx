@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Trash2, RotateCcw, Pencil } from "lucide-react";
 import { Timer } from "../types/timer";
 import { formatTime } from "../utils/time";
-import { useTimerStore } from "../store/useTimerStore";
+import { useTimerStore } from "../redux/actions/timerActions";
 // import { toast } from "sonner";
 import { TimerAudio } from "../utils/audio";
 import { TimerControls } from "./TimerControls";

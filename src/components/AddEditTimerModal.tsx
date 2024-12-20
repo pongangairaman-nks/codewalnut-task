@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Clock } from "lucide-react";
-import { useTimerStore } from "../store/useTimerStore";
+import { useTimerStore } from "../redux/actions/timerActions";
 import { validateTimerForm } from "../utils/validation";
 import { Timer } from "../types/timer";
 import Button from "./Button";
@@ -134,15 +134,11 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
               onChange={(e) => setTitle(e.target.value)}
               onBlur={() => setTouched({ ...touched, title: true })}
               maxLength={50}
-              className={`${
-                touched.title && !isTitleValid
-                  ? "border-red-500"
-                  : "border-gray-300"
-              } w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-3 py-2 border border-light-gray w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="Enter timer title"
             />
             {touched.title && !isTitleValid && (
-              <p className="mt-1 text-sm text-red-500">
+              <p className="mt-1 text-xs text-red-500">
                 Title is required and must be less than 50 characters
               </p>
             )}
@@ -159,7 +155,7 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className={`border-light-gray w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-3 py-2 border border-light-gray w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="Enter timer description (optional)"
             />
           </div>

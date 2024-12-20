@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { TimerItem } from "./TimerItem";
-import { useTimerStore } from "../store/useTimerStore";
+import { useTimerStore } from "../redux/actions/timerActions";
 import { EmptyState } from "./EmptyState";
 
 export const TimerList: React.FC = () => {
