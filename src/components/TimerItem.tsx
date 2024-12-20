@@ -3,11 +3,12 @@ import { Trash2, RotateCcw, Pencil } from "lucide-react";
 import { Timer } from "../types/timer";
 import { formatTime } from "../utils/time";
 import { useTimerStore } from "../store/useTimerStore";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 import { TimerAudio } from "../utils/audio";
 import { TimerControls } from "./TimerControls";
 import { TimerProgress } from "./TimerProgress";
 import { AddEditTimerModal } from "./AddEditTimerModal";
+import { useToast } from "../hooks/useToast";
 
 interface TimerItemProps {
   timer: Timer;
@@ -16,6 +17,8 @@ interface TimerItemProps {
 export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
   const { toggleTimer, deleteTimer, updateTimer, restartTimer } =
     useTimerStore();
+  const { showToast } = useToast(); // Initialize the hook
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const intervalRef = useRef<number | null>(null);
   const timerAudio = TimerAudio.getInstance();
@@ -36,9 +39,8 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
               count++;
             }
           }, 1000);
-          toast.success(`Timer "${timer.title}" has ended!`, {
-            duration: 5000,
-            position: window.innerWidth < 768 ? "bottom-right" : "top-right",
+          showToast({
+            message: `Timer "${timer.title}" has ended!`,
             action: {
               label: "Dismiss",
               onClick: () => {
@@ -59,7 +61,8 @@ export const TimerItem: React.FC<TimerItemProps> = ({ timer }) => {
     timer.remainingTime,
     timer.title,
     timerAudio,
-    updateTimer
+    updateTimer,
+    showToast
   ]);
 
   const handleRestart = () => {

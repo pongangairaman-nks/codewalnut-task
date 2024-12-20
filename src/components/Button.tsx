@@ -1,10 +1,9 @@
-// Button.tsx
 import React from "react";
 
 interface ButtonProps {
   type?: "button" | "submit" | "reset"; // Optional button types (defaults to 'button')
-  onClick?: () => void; // Optional click handler
-  className: string; // Custom classes for styling
+  onClick?: () => void;
+  className: string;
   children: React.ReactNode; // Content of the button (text, icons, or elements)
 }
 

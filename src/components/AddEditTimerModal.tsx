@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { X, Clock } from "lucide-react";
 import { useTimerStore } from "../store/useTimerStore";
 import { validateTimerForm } from "../utils/validation";
-import { toast } from "sonner";
 import { Timer } from "../types/timer";
 import Button from "./Button";
+import { useToast } from "../hooks/useToast";
 
 interface AddEditTimerModalProps {
   isOpen: boolean;
@@ -17,6 +17,8 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
   onClose,
   timer
 }) => {
+  const { showToast } = useToast(); // Initialize the hook
+
   const [title, setTitle] = useState(timer?.title || "");
   const [description, setDescription] = useState(timer?.description || "");
   const [hours, setHours] = useState(
@@ -109,9 +111,8 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
             if (isTitleValid || isTimeValid) {
               handleSubmit();
             } else {
-              toast.error(`Please enter valid input in the form fields`, {
-                duration: 5000,
-                position: window.innerWidth < 768 ? "bottom-right" : "top-right"
+              showToast({
+                message: "Please enter valid input in the form fields"
               });
             }
           }}
