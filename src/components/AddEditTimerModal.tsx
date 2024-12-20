@@ -3,21 +3,28 @@ import { X, Clock } from "lucide-react";
 import { useTimerStore } from "../store/useTimerStore";
 import { validateTimerForm } from "../utils/validation";
 import { toast } from "sonner";
+import { Timer } from "../types/timer";
 
-interface AddTimerModalProps {
+interface AddEditTimerModalProps {
   isOpen: boolean;
   onClose: () => void;
+  timer?: Timer | null;
 }
 
-export const AddTimerModal: React.FC<AddTimerModalProps> = ({
+export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
   isOpen,
-  onClose
+  onClose,
+  timer
 }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [title, setTitle] = useState(timer?.title || "");
+  const [description, setDescription] = useState(timer?.description || "");
+  const [hours, setHours] = useState(
+    Math.floor((timer?.duration || 0) / 3600) || 0
+  );
+  const [minutes, setMinutes] = useState(
+    Math.floor(((timer?.duration || 0) % 3600) / 60) || 0
+  );
+  const [seconds, setSeconds] = useState((timer?.duration || 0) % 60 || 0);
   const [touched, setTouched] = useState({
     title: false,
     hours: false,
@@ -25,7 +32,7 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({
     seconds: false
   });
 
-  const { addTimer } = useTimerStore();
+  const { addTimer, editTimer } = useTimerStore();
 
   if (!isOpen) return null;
 
@@ -36,13 +43,21 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({
 
     const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 
-    addTimer({
-      title: title.trim(),
-      description: description.trim(),
-      duration: totalSeconds,
-      remainingTime: totalSeconds,
-      isRunning: false
-    });
+    if (timer?.id) {
+      editTimer(timer.id, {
+        title: title.trim(),
+        description: description.trim(),
+        duration: totalSeconds
+      });
+    } else {
+      addTimer({
+        title: title.trim(),
+        description: description.trim(),
+        duration: totalSeconds,
+        remainingTime: totalSeconds,
+        isRunning: false
+      });
+    }
 
     onClose();
     setTitle("");
@@ -222,9 +237,8 @@ export const AddTimerModal: React.FC<AddTimerModalProps> = ({
             <button
               type="submit"
               className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors bg-blue-600 hover:bg-blue-700"`}
-              // disabled={!isTitleValid || !isTimeValid}
             >
-              Add Timer
+              {timer?.id ? "Save Changes" : "Add Timer"}
             </button>
           </div>
         </form>

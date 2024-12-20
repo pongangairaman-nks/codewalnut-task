@@ -22,6 +22,7 @@ const timerSlice = createSlice({
       }
     },
     addTimer: (state, action) => {
+      console.log("inside add timer", action.payload);
       state.timers.push({
         ...action.payload,
         id: crypto.randomUUID(),
