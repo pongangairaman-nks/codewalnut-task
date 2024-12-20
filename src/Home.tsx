@@ -3,6 +3,7 @@ import { Plus, Clock } from "lucide-react";
 import { TimerList } from "./components/TimerList";
 import { AddEditTimerModal } from "./components/AddEditTimerModal";
 import { Toaster } from "sonner";
+import Button from "./components/Button";
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,17 +17,15 @@ function Home() {
             <Clock className="w-6 h-6 text-blue-600" />
             <h6 className="text-[24px] font-bold">Timer</h6>
           </div>
-          <button
+          <Button
             onClick={() => setIsModalOpen(true)}
-            className="text-[14px] flex items-center gap-2 px-4 py-0 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
+            className="text-[14px] flex items-center gap-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
           >
             <Plus className="w-4 h-4" />
             Add Timer
-          </button>
+          </Button>
         </div>
-
         <TimerList />
-
         <AddEditTimerModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}

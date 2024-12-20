@@ -4,6 +4,7 @@ import { useTimerStore } from "../store/useTimerStore";
 import { validateTimerForm } from "../utils/validation";
 import { toast } from "sonner";
 import { Timer } from "../types/timer";
+import Button from "./Button";
 
 interface AddEditTimerModalProps {
   isOpen: boolean;
@@ -227,19 +228,19 @@ export const AddEditTimerModal: React.FC<AddEditTimerModalProps> = ({
           </div>
 
           <div className="flex justify-end gap-3 pt-4 border-t">
-            <button
+            <Button
               type="button"
               onClick={handleClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+              className="text-gray-700 bg-gray-100 hover:bg-gray-200"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors bg-blue-600 hover:bg-blue-700"`}
+              className="text-white bg-blue-600 hover:bg-blue-700"
             >
               {timer?.id ? "Save Changes" : "Add Timer"}
-            </button>
+            </Button>
           </div>
         </form>
       </div>
